@@ -15,7 +15,7 @@ COMPANY_TICKERS = {
     "nvidia": "NVDA",
     "apple inc": "AAPL",
     "microsoft corp": "MSFT",
-
+    "tesla motors": "TSLA"
 }
 
 def obtener_precio_accion(driver, user_input):
