@@ -42,6 +42,11 @@ def obtener_precio_accion(driver, user_input):
     try:
         # Inicializar el objeto Ticker de yfinance
         stock = yf.Ticker(ticker)
+
+        #obtener info del ticker
+        info = stock.info
+        ticker_symbol = info.get("symbol", ticker)
+        currency = info.get("currency", "N/A")
         
         # Obtener el historial del último día para extraer el precio de cierre más reciente
         data = stock.history(period="1d")
@@ -49,7 +54,11 @@ def obtener_precio_accion(driver, user_input):
         if not data.empty:
             # Extraer el valor de la columna 'Close' de la última fila disponible
             price = data['Close'].iloc[-1]
-            return f"${price:.2f}"
+            return (
+                f"Ticker: {ticker_symbol}\n"
+                f"Divisa: {currency}\n"
+                f"Precio: {price:.2f}"
+            )
         else:
             return "No se encontraron datos de cotización (puede que el símbolo sea incorrecto o esté deslistado)."
             
